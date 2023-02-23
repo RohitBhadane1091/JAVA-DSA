@@ -1,2 +1,2 @@
 # JAVA-DSA
-Exploring the Data Structure with Java
+Exploring the Data Structures with Java
