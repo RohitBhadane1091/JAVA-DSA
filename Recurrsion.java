@@ -1,4 +1,5 @@
 public class J20_Recurssion {
+    //new StringBuilder("")
     public static int fact(int n){
         if (n-1==0){
             return 1 ;
@@ -242,11 +243,126 @@ public class J20_Recurssion {
             binarySearch(arr,key,first,last,count);
         }
     }
+    public static void reverseString(String s,int i,StringBuilder ans){
+        if (i<0){
+            System.out.println(ans);
+            return;
+        }
+        ans.append(s.charAt(i));
+        reverseString(s,i-1,ans);
 
-    
+    }
+    public static boolean palindrome(String s,int i,int j){
+        if (i>j){
+            return true;
+        }
+        if (s.charAt(i)!=s.charAt(j)){
+            return false;
+        }
+       return  palindrome(s,i+1,j-1);
+
+
+    }
+    public static void bubbleSortRecursion(int[]arr,int n){
+        if (n==0||n==1){
+            return;
+        }
+        for (int i = 0; i < n ; i++) {
+
+            if (arr[i]>arr[i+1]){
+                int temp=arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
+            }
+        }
+        bubbleSortRecursion(arr,n-1);
+        System.out.println("Selection sort using recursion");
+    }
+    public static void printArray(int []arr){
+        for (int i = 0; i < arr.length ; i++) {
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void selectionSortRecursion(int[]arr, int i, int n){
+       int min=i;
+        for (int j = i+1; j <n-1 ; j++) {
+            if (arr[min]>arr[j]){
+                min=j;
+            }
+        }
+        int temp=arr[min];
+        arr[min]=arr[i];
+        arr[i]=temp;
+        if (i+1>=n){
+            return;
+        }
+        selectionSortRecursion(arr,i+1,n);
+
+
+    }
+    public static void merge(int []arr,int s,int mid,int e){
+        int i=s;
+        int j=mid+1;
+        int k=0;
+        int[]temp=new int[e-s+1];
+        while (i<=mid &&j<=e){
+            if (arr[i]<arr[j]){
+                temp[k++]=arr[i++];
+            }
+            else{
+                temp[k++]=arr[j++];
+            }
+        }
+        while (i<=mid){
+            temp[k++]=arr[i++];
+        }
+        while (j<=e){
+            temp[k++]=arr[j++];
+        }
+
+        for (k=0,i=s;k< temp.length;k++,i++){
+            arr[i]=temp[k];
+        }
+    }
+    public static void mergesort(int []arr,int s,int e){
+        if (s>=e){
+            return;
+        }
+        int mid=s+(e-s)/2;
+        mergesort(arr,s,mid);
+        mergesort(arr,mid+1,e);
+        merge(arr,s,mid,e);
+    }
+    public static int partition(int []arr,int s,int e){
+        int pivot=arr[e];
+        int i=s-1;//pointing in array at index -1
+        for (int j =s; j <e; j++) {
+            if (arr[j]<pivot){
+                i++;//points to 0
+                int temp=arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+            }
+        }
+        i++;
+        int temp=pivot;
+        arr[e]=arr[i];
+        arr[i]=temp;
+        return i;
+    }
+    public static void quickSort(int[]arr,int s,int e){
+        if (s>=e){
+            return;
+        }
+        int pi=partition(arr,s,e);
+        quickSort(arr,s,pi-1);
+        quickSort(arr,pi+1,e);
+
+    }
+
+
     public static void main(String[] args) {
-        int []arr={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-        binarySearch(arr,16,0,arr.length-1,0);
+
 
     }
 }
